@@ -4,7 +4,7 @@ FROM gcr.io/go-containerregistry/crane:v0.8.0 AS crane
 FROM summerwind/actions-runner:latest
 
 RUN sudo apt-get update -y \
- && sudo apt-get install gettext yq jq git
+ && sudo apt-get install gettext yq jq git \
  && sudo rm -rf /var/lib/apt/lists/*
 
 COPY --from=kustomize /app/kustomize /app/kustomize

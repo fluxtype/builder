@@ -4,7 +4,7 @@ FROM mikefarah/yq:4 AS yq
 FROM summerwind/actions-runner:latest
 
 RUN sudo apt-get update -y \
- && sudo apt-get install gettext jq git \
+ && sudo apt-get install -y gettext jq git \
  && sudo rm -rf /var/lib/apt/lists/*
 
 COPY --from=kustomize /app/kustomize /app/kustomize

@@ -7,13 +7,10 @@ RUN sudo apt-get update -y \
  && sudo apt-get install -y gettext jq git \
  && sudo rm -rf /var/lib/apt/lists/*
 
-COPY --from=kustomize /app/kustomize /app/kustomize
-COPY --from=yq /usr/bin/yq /app/yq
+COPY --from=kustomize /app/kustomize /bin/kustomize
+COPY --from=yq /usr/bin/yq /bin/yq
 
-RUN wget -O /app/kubectl "https://dl.k8s.io/release/v1.23.12/bin/linux/amd64/kubectl" \
-  && chmod +x /app/kubectl
+RUN sudo wget -O /bin/kubectl "https://dl.k8s.io/release/v1.23.12/bin/linux/amd64/kubectl" \
+  && sudo chmod +x /bin/kubectl
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-WORKDIR /app
-ENV PATH "$PATH:/app"
